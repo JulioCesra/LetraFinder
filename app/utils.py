@@ -7,15 +7,11 @@ def buscar_video(banda, musica):
     query = f"{banda} {musica} official"
     try:
         videosSearch = VideosSearch(query, limit=1)
-        resultado = videosSearch.result()['result'][0]['link']
-        
-        if "watch?v=" in resultado:
-            video_id = resultado.split("watch?v=")[-1]
-            return f"https://www.youtube.com/embed/{video_id}"
-        return resultado 
+        return videosSearch.result()['result'][0]['link']  # formato watch?v=
     except Exception as e:
         print("Erro ao buscar vídeo:", e)
         return None
+
 
 
 # Formata a mensagem passada (nome da banda/nome da música) para o formato aceito na lyrics api

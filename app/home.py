@@ -26,8 +26,7 @@ class LetraFinder:
         elif opcoes == 'Escutar Música':
             if banda and musica:
                 url = utils.buscar_video(banda,musica)
-                with get_informacoes:
-                    components.iframe(url,height=360)
+                get_informacoes.video(url)
             else:
                 st.warning('Coloque todas as informações necessárias!')
         elif opcoes == 'Baixar Letra':
