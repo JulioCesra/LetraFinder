@@ -10,7 +10,7 @@ LetraFinder é um projeto desenvolvido para facilitar a busca por letras de mús
 
 ## Tecnologias Utilizadas
 
--Python: Linguagem principal do projeto.
+- Python: Linguagem principal do projeto.
 
 ## Bibliotecas:
 
