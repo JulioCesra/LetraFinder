@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import utils
 
 class LetraFinder:
@@ -25,7 +26,8 @@ class LetraFinder:
         elif opcoes == 'Escutar Música':
             if banda and musica:
                 url = utils.buscar_video(banda,musica)
-                get_informacoes.video(url)
+                with get_informacoes:
+                    components.iframe(url,height=360)
             else:
                 st.warning('Coloque todas as informações necessárias!')
         elif opcoes == 'Baixar Letra':

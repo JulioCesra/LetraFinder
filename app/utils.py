@@ -2,14 +2,21 @@ from youtubesearchpython import VideosSearch
 
 # Função responsável por buscar o vídeo atráves da biblioteca youtubesearchpython,
 # retorna o primeiro elemento da url que contêm o vídeo oficial da banda de acordo com a música passada nos parâmetros. 
+
 def buscar_video(banda, musica):
     query = f"{banda} {musica} official"
     try:
         videosSearch = VideosSearch(query, limit=1)
-        return videosSearch.result()['result'][0]['link']
+        resultado = videosSearch.result()['result'][0]['link']
+        
+        if "watch?v=" in resultado:
+            video_id = resultado.split("watch?v=")[-1]
+            return f"https://www.youtube.com/embed/{video_id}"
+        return resultado 
     except Exception as e:
         print("Erro ao buscar vídeo:", e)
         return None
+
 
 # Formata a mensagem passada (nome da banda/nome da música) para o formato aceito na lyrics api
 def formatar_mensagem(string:str):
