@@ -25,7 +25,7 @@ class LetraFinder:
                 st.warning('Coloque todas as informações necessárias!')
         elif opcoes == 'Escutar Música':
             if banda and musica:
-                url = utils.buscar_video(banda,musica)
+                url = utils.buscar_video_youtube(banda,musica)
                 get_informacoes.video(url)
             else:
                 st.warning('Coloque todas as informações necessárias!')

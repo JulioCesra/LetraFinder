@@ -1,18 +1,24 @@
-from youtubesearchpython import VideosSearch
+from googleapiclient.discovery import build
 
-# Função responsável por buscar o vídeo atráves da biblioteca youtubesearchpython,
-# retorna o primeiro elemento da url que contêm o vídeo oficial da banda de acordo com a música passada nos parâmetros. 
+acesso_api_youtube = 'AIzaSyCld0I_Mmy1JIIg1CeElBzGdmqJby5ILcs'
 
-def buscar_video(banda, musica):
+# Função responsável por buscar o vídeo no youtube
+def buscar_video_youtube(banda, musica):
+    youtube = build('youtube', 'v3', developerKey=acesso_api_youtube)
+    
     query = f"{banda} {musica} official"
     try:
-        videosSearch = VideosSearch(query, limit=1)
-        return videosSearch.result()['result'][0]['link']  # formato watch?v=
+        request = youtube.search().list(part="snippet",q=query,type="video",maxResults=1)
+        response = request.execute()
+        
+        if 'items' in response and len(response['items']) > 0:
+            return f"https://www.youtube.com/watch?v={response['items'][0]['id']['videoId']}"
+        else:
+            print("Nenhum vídeo encontrado.")
+            return None
     except Exception as e:
-        print("Erro ao buscar vídeo:", e)
+        print(f"Erro ao buscar vídeo: {e}")
         return None
-
-
 
 # Formata a mensagem passada (nome da banda/nome da música) para o formato aceito na lyrics api
 def formatar_mensagem(string:str):
