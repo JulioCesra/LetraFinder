@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import utils
 
 class LetraFinder:
@@ -11,7 +10,7 @@ class LetraFinder:
     entrada_informacaoes.write("Digite o nome da música e da banda para encontrar a letra.")
     banda = entrada_informacaoes.text_input('Nome da Banda')
     musica = entrada_informacaoes.text_input('Nome da Música')
-    opcoes = entrada_informacaoes.selectbox(label='Selecione uma das opções',options=['Buscar Letra','Escutar Música','Baixar Letra'])
+    opcoes = entrada_informacaoes.selectbox(label='Selecione uma das opções',options=['Buscar Letra','Buscar vídeo oficial','Baixar Letra'])
     get_informacoes = st.container(border=True)
     if utils.procurar_letra(banda,musica) == False:
         st.warning('Não foi possível encontrar as informações fornecidas!')
@@ -23,10 +22,11 @@ class LetraFinder:
                 get_informacoes.text(letra)    
             else:
                 st.warning('Coloque todas as informações necessárias!')
-        elif opcoes == 'Escutar Música':
+        elif opcoes == 'Buscar vídeo oficial':
             if banda and musica:
                 url = utils.buscar_video_youtube(banda,musica)
-                get_informacoes.video(url)
+                get_informacoes.link_button(label='Visualizar vídeo',
+                                            url=url)
             else:
                 st.warning('Coloque todas as informações necessárias!')
         elif opcoes == 'Baixar Letra':

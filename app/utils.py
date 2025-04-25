@@ -1,25 +1,3 @@
-from googleapiclient.discovery import build
-
-acesso_api_youtube = 'AIzaSyCld0I_Mmy1JIIg1CeElBzGdmqJby5ILcs'
-
-# Função responsável por buscar o vídeo no youtube
-def buscar_video_youtube(banda, musica):
-    youtube = build('youtube', 'v3', developerKey=acesso_api_youtube)
-    
-    query = f"{banda} {musica} official"
-    try:
-        request = youtube.search().list(part="snippet",q=query,type="video",maxResults=1)
-        response = request.execute()
-        
-        if 'items' in response and len(response['items']) > 0:
-            return f"https://www.youtube.com/watch?v={response['items'][0]['id']['videoId']}"
-        else:
-            print("Nenhum vídeo encontrado.")
-            return None
-    except Exception as e:
-        print(f"Erro ao buscar vídeo: {e}")
-        return None
-
 # Formata a mensagem passada (nome da banda/nome da música) para o formato aceito na lyrics api
 def formatar_mensagem(string:str):
     string_separada = string.split()
@@ -49,3 +27,28 @@ def procurar_letra(nome_banda:str, nome_musica:str):
         letra = letra.replace('\n', ' ')
         letra_formatada = re.sub(r'(?<!^)\s(?=[A-Z])', '\n', letra)
         return letra_formatada
+    
+def buscar_video_youtube(banda, musica):
+    from googleapiclient.discovery import build
+
+    api_key = 'AIzaSyCld0I_Mmy1JIIg1CeElBzGdmqJby5ILcs'  
+    youtube = build("youtube", "v3", developerKey=api_key)
+    
+    query = f"{banda} {musica} official"
+    try:
+        request = youtube.search().list(
+            part="snippet",
+            q=query,
+            type="video",
+            maxResults=1
+        )
+        response = request.execute()
+        
+        if 'items' in response and len(response['items']) > 0:
+            video_id = response['items'][0]['id']['videoId']
+            return f"https://www.youtube.com/watch?v={video_id}"
+        else:
+            return None
+    except Exception as e:
+        print(f"Error ao procurar o vídeo, ERRO: {e}")
+        return None

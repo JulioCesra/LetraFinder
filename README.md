@@ -18,7 +18,7 @@ LetraFinder é um projeto desenvolvido para facilitar a busca por letras de mús
 
 - Streamlit para criação da interface web.
 
-- youtubesearchpython para busca do vídeo na plataforma youtube
+- googleapiclient.discovery para busca do vídeo na plataforma youtube
 
 - pytest para a realização de testes unitários
 

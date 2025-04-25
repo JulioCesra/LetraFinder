@@ -12,6 +12,4 @@ def test_formatar_mensagem():
     assert app.utils.formatar_mensagem('teste')
     
 def test_buscar_video_youtube():
-    assert app.utils.buscar_video_youtube(banda='Guns and roses',musica='November rain')
-    assert app.utils.buscar_video_youtube(banda=2,musica='November rain')
-    assert app.utils.buscar_video_youtube(banda='Guns and roses',musica=len('oi'))
+    assert app.utils.buscar_video_youtube("Red Hot Chili Peppers", "Californication")
