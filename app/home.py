@@ -2,6 +2,12 @@ import streamlit as st
 import utils
 
 class LetraFinder:
+
+    st.set_page_config(
+    page_title="LetraFinder",       
+    page_icon="🎵",
+    )
+
     descricao_site = st.container()
     descricao_site.title(":blue[LetraFinder]")
     descricao_site.write("Encontre, escute e baixe a letra da sua música favorita!")
